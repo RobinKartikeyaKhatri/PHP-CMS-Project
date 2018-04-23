@@ -27,6 +27,23 @@
                                 </div>
                             </form>
                         </div>
+
+                        <div class="col-xs-6">
+                            <table class="table table-responsive table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Category Title</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Basketball</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         
                     </div>
                 </div>
