@@ -17,6 +17,34 @@
                             <small>Author Name Here</small>
                         </h1>
                         <div class="col-xs-6">
+                        
+                        <?php
+                        
+                            if(isset($_POST['submit']))
+                            {
+                                $cat_title = mysqli_real_escape_string($connection, trim($_POST['cat_title']));
+                        
+                                if($cat_title == "" || empty($cat_title))
+                                {
+                                    echo "<p class='text-danger'>Please enter category!</p>";
+                                }
+                                else
+                                {
+                                    $query = "INSERT INTO categories(cat_title) VALUES('$cat_title')";
+                                    $result = mysqli_query($connection, $query);
+
+                                    echo "<p class='text-success'>Recored added succeessfuly.</p>";
+
+                                    if(!$result)
+                                    {
+                                        die("Query failed! " . mysqli_error($connection));
+                                    }
+                                }
+                            }
+                            
+
+                        ?>
+
                             <form action="" method="post">
                                 <div class="form-group">
                                     <label for="cat_title">Add Category</label>
