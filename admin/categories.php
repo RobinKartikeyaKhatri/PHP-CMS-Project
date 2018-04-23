@@ -19,7 +19,7 @@
                         <div class="col-xs-6">
                         
                         <?php
-                        
+                            // Code to add categories
                             if(isset($_POST['submit']))
                             {
                                 $cat_title = mysqli_real_escape_string($connection, trim($_POST['cat_title']));
@@ -67,7 +67,7 @@
                                 <tbody>
                                 
                                 <?php
-                            
+                                    // Code to display categories
                                     $query = "SELECT * FROM categories";
                                     $result = mysqli_query($connection, $query);
 
@@ -79,10 +79,30 @@
                                         echo "<tr>";
                                         echo "<td>$cat_id</td>";
                                         echo "<td>$cat_title</td>";
+                                        echo "<td><a class='btn btn-danger' href='categories.php?delete=$cat_id '>DELETE</a></td>";
                                         echo "</tr>";
                                     }
 
                                 ?>
+
+                                <?php
+                                // Code to delete categories
+                                if(isset($_GET['delete']))
+                                {
+                                    $the_delete_cat_id = $_GET['delete'];
+
+                                    $query = "DELETE FROM categories WHERE cat_id = {$the_delete_cat_id} LIMIT 1";
+                                    $result = mysqli_query($connection, $query);
+
+                                    header("Location: categories.php");
+                                    
+
+
+                                }
+
+                                
+                                ?>
+
                                 </tbody>
                             </table>
                         </div>
