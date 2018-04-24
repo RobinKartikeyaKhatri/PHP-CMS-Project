@@ -31,17 +31,43 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>8</td>
-                                    <td>9</td>
+
+                            <?php //Showing all posts
+
+                                $query = "SELECT * FROM posts";
+                                $result = mysqli_query($connection, $query);
+
+                                while ($row = mysqli_fetch_array($result)) 
+                                {
+                                    $post_id = $row['post_id'];
+                                    $post_category_id = $row['post_category_id'];
+                                    $post_title = $row['post_title'];
+                                    $post_author = $row['post_author'];
+                                    $post_date = $row['post_date'];
+                                    $post_image = $row['post_image'];
+                                    $post_content = $row['post_content'];
+                                    $post_tags = $row['post_tags'];
+                                    $post_comment_count = $row['post_comment_count'];
+                                    $post_status = $row['post_status'];
+                            ?>
+
+                                 <tr>
+                                    <td><?php echo $post_id; ?></td>
+                                    <td><?php echo $post_author; ?></td>
+                                    <td><?php echo $post_title; ?></td>
+                                    <td><?php echo $post_category_id; ?></td>
+                                    <td><?php echo $post_status; ?></td>
+                                    <td><img class='img-responsive' width='100' src='../images/<?php echo $post_image; ?>'></td>
+                                    <td><?php echo $post_tags; ?></td>
+                                    <td><?php echo $post_comment_count; ?></td>
+                                    <td><?php echo $post_date; ?></td>
                                 </tr>
+                            <?php    
+                                }
+
+                            ?>
+
+                               
                             </tbody>
                         </table>
                     </div>
