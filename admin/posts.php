@@ -28,8 +28,8 @@
                             }
 
                             switch ($source) {
-                                case 'value':
-                                    # code...
+                                case 'add_post':
+                                    include("includes/add_post.php");
                                     break;
                                 
                                 default:
