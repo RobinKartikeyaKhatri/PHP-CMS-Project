@@ -44,7 +44,7 @@
                             
 
                         ?>
-
+                            <!-- Form for Add Categories -->
                             <form action="" method="post">
                                 <div class="form-group">
                                     <label for="cat_title">Add Category</label>
@@ -54,6 +54,18 @@
                                     <input type="submit" name="submit" class="btn btn-primary" value="Add Category">
                                 </div>
                             </form>
+
+                            <?php
+                                // Including update_categories.php file here
+                                if(isset($_GET['edit']))
+                                {
+                                    $cat_id = $_GET['edit'];
+
+                                    include("includes/update_categories.php");
+                                }
+
+                            ?>
+
                         </div>
 
                         <div class="col-xs-6">
@@ -80,6 +92,7 @@
                                         echo "<td>$cat_id</td>";
                                         echo "<td>$cat_title</td>";
                                         echo "<td><a class='btn btn-danger' href='categories.php?delete=$cat_id '>DELETE</a></td>";
+                                        echo "<td><a class='btn btn-warning' href='categories.php?edit=$cat_id '>EDIT</a></td>";
                                         echo "</tr>";
                                     }
 
@@ -95,11 +108,7 @@
                                     $result = mysqli_query($connection, $query);
 
                                     header("Location: categories.php");
-                                    
-
-
                                 }
-
                                 
                                 ?>
 
