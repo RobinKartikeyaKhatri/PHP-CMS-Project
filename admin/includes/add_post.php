@@ -2,21 +2,32 @@
 
     if(isset($_POST['create_post']))
     {
-       $post_title          = $_POST['post_title'];
-       $post_category_id    = $_POST['post_category_id'];
-       $post_author         = $_POST['post_author'];
-       $post_status         = $_POST['post_status'];
+       $post_title          = mysqli_real_escape_string($connection, trim($_POST['post_title']));
+       $post_category_id    = mysqli_real_escape_string($connection, trim($_POST['post_category_id']));
+       $post_author         = mysqli_real_escape_string($connection, trim($_POST['post_author']));
+       $post_status         = mysqli_real_escape_string($connection, trim($_POST['post_status']));
 
        $post_image          = $_FILES['image']['name'];
        $post_image_tmp      = $_FILES['image']['tmp_name'];
 
-       $post_tags           = $_POST['post_tags'];
-       $post_content        = $_POST['post_content'];
+       $post_tags           = mysqli_real_escape_string($connection, trim($_POST['post_tags']));
+       $post_content        = mysqli_real_escape_string($connection, trim($_POST['post_content']));
 
        $post_date           = date('d-m-y');
        $post_comment_count  = 4;
 
        move_uploaded_file($post_image_tmp, "../images/$post_image");
+
+       $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, 
+                    post_content, post_tags, post_comment_count, post_status) VALUES($post_category_id, 
+                    '$post_title', 
+                    '$post_author', now(), '$post_image', '$post_content', '$post_tags', $post_comment_count, 
+                    '$post_status')";
+
+        $result = mysqli_query($connection, $query);
+
+        confirmQuery($result);
+
     }
 
 ?>
@@ -56,9 +67,7 @@
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea name="post_content" class="form-control" cols="30" rows="10">
-
-        </textarea>
+        <textarea name="post_content" class="form-control" cols="30" rows="10"></textarea>
     </div>
 
     <div class="form-group">
