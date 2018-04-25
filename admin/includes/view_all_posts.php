@@ -10,6 +10,7 @@
             <th>Tags</th>
             <th>Comments</th>
             <th>Date</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -43,6 +44,7 @@
             <td><?php echo $post_tags; ?></td>
             <td><?php echo $post_comment_count; ?></td>
             <td><?php echo $post_date; ?></td>
+            <td><a class='btn btn-danger' href="posts.php?delete=<?php echo $post_id; ?>">Delete</a></td>
         </tr>
     <?php    
         }
@@ -52,3 +54,21 @@
         
     </tbody>
 </table>
+
+<?php
+
+if (isset($_GET['delete'])) 
+{
+   $delete_post_id = $_GET['delete'];
+
+   $query = "DELETE FROM posts WHERE post_id = $delete_post_id LIMIT 1";
+   $result = mysqli_query($connection, $query);
+
+   confirmQuery($result);
+
+   header("Location: posts.php");
+
+
+}
+
+?>
