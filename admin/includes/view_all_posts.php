@@ -10,6 +10,7 @@
             <th>Tags</th>
             <th>Comments</th>
             <th>Date</th>
+            <th>Edit</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -44,6 +45,7 @@
             <td><?php echo $post_tags; ?></td>
             <td><?php echo $post_comment_count; ?></td>
             <td><?php echo $post_date; ?></td>
+            <td><a class='btn btn-warning' href="posts.php?source=edit_post&p_id=<?php echo $post_id; ?>">Edit</a></td>
             <td><a class='btn btn-danger' href="posts.php?delete=<?php echo $post_id; ?>">Delete</a></td>
         </tr>
     <?php    
