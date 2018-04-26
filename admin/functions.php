@@ -66,11 +66,7 @@
     function confirmQuery($result) // Confirm query
     {
         global $connection;
-        if ($result) 
-        {
-            echo "<p class='text-center text-success'>Post created successfully.</p>";
-        }
-        else
+        if (!$result) 
         {
             die("Query failed! " . mysqli_error($connection));
         }
