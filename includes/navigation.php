@@ -16,7 +16,7 @@
 
                 <?php
 
-                    $query = "SELECT * FROM categories";
+                    $query = "SELECT * FROM categories LIMIT 5";
                     $result = mysqli_query($connection, $query);
 
                     while($row = mysqli_fetch_array($result))
