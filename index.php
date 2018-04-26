@@ -38,7 +38,7 @@
 
                 <!-- First Blog Post -->
                 <h2>
-                    <a href="#"><?php echo $post_title; ?></a>
+                    <a href="post.php?p_id=<?php echo $post_id;?>"><?php echo $post_title; ?></a>
                 </h2>
                 <p class="lead">
                     by <a href="index.php"><?php echo $post_author; ?></a>
