@@ -33,25 +33,41 @@
             $post_tags = $row['post_tags'];
             $post_comment_count = $row['post_comment_count'];
             $post_status = $row['post_status'];
-    ?>
 
-            <tr>
-            <td><?php echo $post_id; ?></td>
-            <td><?php echo $post_author; ?></td>
-            <td><?php echo $post_title; ?></td>
-            <td><?php echo $post_category_id; ?></td>
-            <td><?php echo $post_status; ?></td>
-            <td><img class='img-responsive' width='100' src='../images/<?php echo $post_image; ?>'></td>
-            <td><?php echo $post_tags; ?></td>
-            <td><?php echo $post_comment_count; ?></td>
-            <td><?php echo $post_date; ?></td>
-            <td><a class='btn btn-warning' href="posts.php?source=edit_post&p_id=<?php echo $post_id; ?>">Edit</a></td>
-            <td><a class='btn btn-danger' href="posts.php?delete=<?php echo $post_id; ?>">Delete</a></td>
-        </tr>
-    <?php    
+            echo "<tr>";
+            echo "<td>$post_id</td>";
+            echo "<td>$post_author</td>";
+            echo "<td>$post_title</td>";
+
+            $query = "SELECT * FROM categories WHERE cat_id = $post_category_id";
+            $select_categories = mysqli_query($connection, $query);
+            while($row = mysqli_fetch_array($select_categories))
+            {
+                $cat_id = $row['cat_id'];
+                $cat_title = $row['cat_title'];
+
+                echo "<td>$cat_title</td>";
+            }
+            
+
+            
+
+
+
+            echo "<td>$post_status";
+            echo "<td><img class='img-responsive' width='100' src='../images/$post_image'</td>";
+            echo "<td>$post_tags</td>";
+            echo "<td>$post_comment_count</td>";
+            echo "<td>$post_date</td>";
+            echo "<td><a class='btn btn-warning' href='posts.php?source=edit_post&p_id=$post_id'>Edit</a></td>";
+            echo "<td><a class='btn btn-danger' href='posts.php?delete=$post_id'>Delete</a></td>";
+            echo "</tr>";
         }
-
     ?>
+    
+
+        
+    
 
         
     </tbody>
