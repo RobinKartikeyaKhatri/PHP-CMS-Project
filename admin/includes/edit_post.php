@@ -22,6 +22,46 @@
         }
     }
 
+    if (isset($_POST['update_post'])) 
+    {
+       $post_title          =  mysqli_real_escape_string($connection, trim($_POST['post_title']));
+       $post_category_id    =  mysqli_real_escape_string($connection, trim($_POST['post_category_id']));
+       $post_author         =  mysqli_real_escape_string($connection, trim($_POST['post_author']));
+       $post_status         =  mysqli_real_escape_string($connection, trim($_POST['post_status']));
+
+       $post_image          =  $_FILES['image']['name'];
+       $post_image_tmp      =  $_FILES['image']['tmp_name'];
+
+       $post_tags           =  mysqli_real_escape_string($connection, trim($_POST['post_tags']));
+       $post_content        =  mysqli_real_escape_string($connection, trim($_POST['post_content']));
+
+       move_uploaded_file($post_image_tmp, "../images/$post_image");
+
+       if(empty($post_image))
+       {
+            $query = "SELECT * FROM posts WHERE post_id = $the_get_post_id";
+            $select_image = mysqli_query($connection, $query);
+
+            while($row = mysqli_fetch_array($select_image))
+            {
+                $post_image = $row['post_image'];
+            }
+       }
+
+
+       $query = "UPDATE posts SET post_category_id = $post_category_id, post_title = '$post_title', 
+                post_author = '$post_author', post_date = now(), post_image = '$post_image', 
+                post_content = '$post_content', post_tags = '$post_tags', 
+                post_comment_count = $post_comment_count, post_status = '$post_status' 
+                WHERE post_id = $the_get_post_id";
+
+        $result = mysqli_query($connection, $query);
+
+        confirmQuery($result);
+
+
+    }
+
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -32,6 +72,7 @@
     </div>
 
     <div class="form-group">
+        <label for="post_category">Post Category</label>
         <select name="post_category_id" class="form-control">
             <?php
             
@@ -65,6 +106,7 @@
 
     <div class="form-group">
         <img class='img-responsive' width = "200" src="../images/<?php echo $post_image; ?>" alt="">
+        <input type="file" name="image" class="form-control">
     </div>
 
     <div class="form-group">
@@ -78,7 +120,7 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Edit Post" name="edit_post" class="btn btn-primary">
+        <input type="submit" value="Edit Post" name="update_post" class="btn btn-primary">
     </div>
 
 </form>
