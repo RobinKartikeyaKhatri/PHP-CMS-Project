@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="index.php">Start CMS</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -25,7 +25,7 @@
                         $cat_title = $row['cat_title'];
                 ?>
                     <li>
-                        <a href="#"><?php echo $cat_title; ?></a>
+                        <a href="category.php?category=<?php echo $cat_id; ?>"><?php echo $cat_title; ?></a>
                     </li>
             <?php   }
 
