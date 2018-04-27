@@ -71,7 +71,7 @@
             echo "<td>$comment_date</td>";
             echo "<td><a class='btn btn-success' href='#'>Approve</a></td>";
             echo "<td><a class='btn btn-warning' href='#'>Unapprove</a></td>";
-            echo "<td><a class='btn btn-danger' href='#'>Delete</a></td>";
+            echo "<td><a class='btn btn-danger' href='comments.php?delete=$comment_id'>Delete</a></td>";
             echo "</tr>";
         }
     ?>
@@ -88,14 +88,14 @@
 
 if (isset($_GET['delete'])) 
 {
-   $delete_post_id = $_GET['delete'];
+   $delete_comment_id = $_GET['delete'];
 
-   $query = "DELETE FROM posts WHERE post_id = $delete_post_id LIMIT 1";
+   $query = "DELETE FROM comments WHERE comment_id = $delete_comment_id LIMIT 1";
    $result = mysqli_query($connection, $query);
 
    confirmQuery($result);
 
-   header("Location: posts.php");
+   header("Location: comments.php");
 
 
 }
