@@ -69,9 +69,9 @@
                 {
                     $the_get_post_id = $_GET['p_id'];
 
-                    $comment_author = mysqli_real_escape_string(trim($_POST['comment_author']));
-                    $comment_email  = mysqli_real_escape_string(trim($_POST['comment_email']));
-                    $commet_content = mysqli_real_escape_string(trim($_POST['comment_content']));
+                    $comment_author = mysqli_real_escape_string($connection, trim($_POST['comment_author']));
+                    $comment_email  = mysqli_real_escape_string($connection, trim($_POST['comment_email']));
+                    $commet_content = mysqli_real_escape_string($connection, trim($_POST['comment_content']));
 
                     $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, 
                                 comment_content, comment_status, comment_date) VALUES($the_get_post_id, 
