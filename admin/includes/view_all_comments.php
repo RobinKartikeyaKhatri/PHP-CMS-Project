@@ -53,7 +53,21 @@
 
             echo "<td>$comment_email";
             echo "<td>$comment_status</td>";
-            echo "<td>SOME TITLE</td>";
+
+            $query = "SELECT * FROM posts WHERE post_id = $comment_post_id";
+            $result_show = mysqli_query($connection, $query);
+
+            while($row = mysqli_fetch_array($result_show))
+            {
+                $post_id = $row['post_id'];
+                $post_title = $row['post_title'];
+
+                echo "<td><a class='btn btn-primary' href='../post.php?p_id=$post_id'>$post_title</a></td>";
+            }
+
+            
+
+
             echo "<td>$comment_date</td>";
             echo "<td><a class='btn btn-success' href='#'>Approve</a></td>";
             echo "<td><a class='btn btn-warning' href='#'>Unapprove</a></td>";
