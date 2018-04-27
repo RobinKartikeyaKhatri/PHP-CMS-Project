@@ -14,14 +14,14 @@
        $post_content        = mysqli_real_escape_string($connection, trim($_POST['post_content']));
 
        $post_date           = date('d-m-y');
-       $post_comment_count  = 4;
+    //    $post_comment_count  = 4;
 
        move_uploaded_file($post_image_tmp, "../images/$post_image");
 
        $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, 
-                    post_content, post_tags, post_comment_count, post_status) VALUES($post_category_id, 
+                    post_content, post_tags, post_status) VALUES($post_category_id, 
                     '$post_title', 
-                    '$post_author', now(), '$post_image', '$post_content', '$post_tags', $post_comment_count, 
+                    '$post_author', now(), '$post_image', '$post_content', '$post_tags',  
                     '$post_status')";
 
         $result = mysqli_query($connection, $query);
