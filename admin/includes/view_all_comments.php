@@ -69,8 +69,8 @@
 
 
             echo "<td>$comment_date</td>";
-            echo "<td><a class='btn btn-success' href='#'>Approve</a></td>";
-            echo "<td><a class='btn btn-warning' href='#'>Unapprove</a></td>";
+            echo "<td><a class='btn btn-success' href='comments.php?approve=$comment_id'>Approve</a></td>";
+            echo "<td><a class='btn btn-warning' href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
             echo "<td><a class='btn btn-danger' href='comments.php?delete=$comment_id'>Delete</a></td>";
             echo "</tr>";
         }
@@ -98,6 +98,30 @@ if (isset($_GET['delete']))
    header("Location: comments.php");
 
 
+}
+
+if (isset($_GET['approve'])) 
+{
+    $the_approve_id = $_GET['approve'];
+
+    $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = $the_approve_id LIMIT 1";
+    $approve_comment_query = mysqli_query($connection, $query);
+
+    confirmQuery($approve_comment_query);
+
+    header("Location: comments.php");
+}
+
+if(isset($_GET['unapprove']))
+{
+    $the_unapprove_id = $_GET['unapprove'];
+
+    $query = "UPDATE comments SET comment_status = 'unaproved' WHERE comment_id = $the_unapprove_id LIMIT 1";
+    $unapprove_comment_query = mysqli_query($connection, $query);
+
+    confirmQuery($unapprove_comment_query);
+
+    header("Location: comments.php");
 }
 
 ?>
