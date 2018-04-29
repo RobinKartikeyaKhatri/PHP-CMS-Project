@@ -2,7 +2,22 @@
 
     if(isset($_GET['edit_user']))
     {
-        echo $the_edit_user_id = $_GET['edit_user'];
+        $the_edit_user_id = $_GET['edit_user'];
+
+        $query = "SELECT * FROM users WHERE user_id = $the_edit_user_id";
+        $select_all_users_data = mysqli_query($connection, $query);
+
+        while ($row = mysqli_fetch_array($select_all_users_data)) 
+        {
+           $user_id         = $row['user_id'];
+           $username        = $row['username'];
+           $password        = $row['password'];
+           $user_firstname  = $row['user_firstname'];
+           $user_lastname   = $row['user_lastname'];
+           $user_email      = $row['user_email'];
+           $user_image      = $row['user_image'];
+           $user_role       = $row['user_role'];
+        }
     }
 
     // if(isset($_POST['create_user']))
@@ -39,31 +54,32 @@
     
     <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" name="username" class="form-control">
+            <input type="text" name="username" value="<?php echo $username; ?>" class="form-control">
     </div>
 
     <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" name="password" class="form-control">
+            <input type="password" name="password" value="<?php echo $password; ?>" class="form-control">
     </div>
 
     <div class="form-group">
         <label for="user_firstname">Firstname</label>
-        <input type="text" name="user_firstname" class="form-control">
+        <input type="text" name="user_firstname" value="<?php echo $user_firstname; ?>" class="form-control">
     </div>
 
     <div class="form-group">
         <label for="user_lastname">Lastname</label>
-        <input type="text" name="user_lastname" class="form-control">
+        <input type="text" name="user_lastname" value="<?php echo $user_lastname; ?>" class="form-control">
     </div>
 
     <div class="form-group">
         <label for="user_email">Email</label>
-        <input type="email" name="user_email" class="form-control">
+        <input type="email" name="user_email" value="<?php echo $user_email; ?>" class="form-control">
     </div>
 
     <div class="form-group">
         <label for="user_image">Image</label>
+        <img class="img-responsive" width="200" src="../images/<?php echo $user_image; ?>" alt="">
         <input type="file" name="user_image" class="form-control">
     </div>
 
