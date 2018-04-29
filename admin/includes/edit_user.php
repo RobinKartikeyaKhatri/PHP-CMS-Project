@@ -20,32 +20,43 @@
         }
     }
 
-    // if(isset($_POST['create_user']))
-    // {
-    //    $username            = mysqli_real_escape_string($connection, trim($_POST['username']));
-    //    $password            = mysqli_real_escape_string($connection, trim($_POST['password']));
-    //    $user_firstname      = mysqli_real_escape_string($connection, trim($_POST['user_firstname']));
-    //    $user_lastname       = mysqli_real_escape_string($connection, trim($_POST['user_lastname']));
-    //    $user_email          = mysqli_real_escape_string($connection, trim($_POST['user_email']));
+    if(isset($_POST['update_user']))
+    {
+       $username            = mysqli_real_escape_string($connection, trim($_POST['username']));
+       $password            = mysqli_real_escape_string($connection, trim($_POST['password']));
+       $user_firstname      = mysqli_real_escape_string($connection, trim($_POST['user_firstname']));
+       $user_lastname       = mysqli_real_escape_string($connection, trim($_POST['user_lastname']));
+       $user_email          = mysqli_real_escape_string($connection, trim($_POST['user_email']));
 
-    //    $user_image          = $_FILES['user_image']['name'];
-    //    $user_image_tmp      = $_FILES['user_image']['tmp_name'];
-    //    $user_role           = $_POST['user_role'];
+       $user_image          = $_FILES['user_image']['name'];
+       $user_image_tmp      = $_FILES['user_image']['tmp_name'];
+       $user_role           = $_POST['user_role'];
 
        
        
 
-    //    move_uploaded_file($user_image_tmp, "../images/$user_image");
+       move_uploaded_file($user_image_tmp, "../images/$user_image");
 
-    //    $query = "INSERT INTO users(username, password, user_firstname, user_lastname, user_email, 
-    //                 user_image, user_role) VALUES('$username', '$password', '$user_firstname', '$user_lastname', 
-    //                 '$user_email', '$user_image', '$user_role')";
+       if(empty($user_image))
+       {
+            $query = "SELECT * FROM users WHERE user_id = $the_edit_user_id";
+            $select_image = mysqli_query($connection, $query);
 
-    //     $create_user = mysqli_query($connection, $query);
+            while($row = mysqli_fetch_array($select_image))
+            {
+                $user_image = $row['user_image'];
+            }
+       }
 
-    //     confirmQuery($create_user);
+       $query = "UPDATE users SET username = '$username', password = '$password', 
+                user_firstname = '$user_firstname', user_lastname = '$user_lastname', user_email = '$user_email', 
+                user_image = '$user_image', user_role = '$user_role' WHERE user_id = $the_edit_user_id";
 
-    // }
+        $update_user_query = mysqli_query($connection, $query);
+
+        confirmQuery($update_user_query);
+
+    }
 
 ?>
 
@@ -107,7 +118,7 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Edit User" name="edit_user" class="btn btn-primary">
+        <input type="submit" value="Update User" name="update_user" class="btn btn-primary">
     </div>
 
 </form>
