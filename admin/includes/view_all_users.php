@@ -7,6 +7,7 @@
             <th>Lastname</th>
             <th>Email</th>
             <th>Role</th>
+            <th>User Image</th>
             <th>Cahnge To Admin</th>
             <th>Change To Subscriber</th>
             <th>Edit User</th>
@@ -55,6 +56,7 @@
 
 
             echo "<td>$user_role</td>";
+            echo "<td><img class='img-responsive' width='200' src='../images/$user_image'></td>";
             echo "<td><a class='btn btn-success' href='users.php?change_to_admin=$user_id'>Change To Admin</a></td>";
             echo "<td><a class='btn btn-warning' href='users.php?change_to_subscriber=$user_id'>Change To Subscriber</a></td>";
             echo "<td><a class='btn btn-primary' href='users.php?source=edit_user&edit_user=$user_id'>Edit</a></td>";
