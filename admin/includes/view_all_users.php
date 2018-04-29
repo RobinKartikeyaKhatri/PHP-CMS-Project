@@ -9,6 +9,7 @@
             <th>Role</th>
             <th>Cahnge To Admin</th>
             <th>Change To Subscriber</th>
+            <th>Edit User</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -56,6 +57,7 @@
             echo "<td>$user_role</td>";
             echo "<td><a class='btn btn-success' href='users.php?change_to_admin=$user_id'>Change To Admin</a></td>";
             echo "<td><a class='btn btn-warning' href='users.php?change_to_subscriber=$user_id'>Change To Subscriber</a></td>";
+            echo "<td><a class='btn btn-primary' href='users.php?source=edit_user&edit_user=$user_id'>Edit</a></td>";
             echo "<td><a class='btn btn-danger' href='users.php?delete=$user_id'>Delete</a></td>";
             echo "</tr>";
         }
