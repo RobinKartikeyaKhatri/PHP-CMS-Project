@@ -7,6 +7,7 @@
             <th>Lastname</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -51,9 +52,7 @@
 
 
             echo "<td>$user_role</td>";
-            // echo "<td><a class='btn btn-success' href='comments.php?approve=$comment_id'>Approve</a></td>";
-            // echo "<td><a class='btn btn-warning' href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
-            // echo "<td><a class='btn btn-danger' href='comments.php?delete=$comment_id'>Delete</a></td>";
+            echo "<td><a class='btn btn-danger' href='users.php?delete=$user_id'>Delete</a></td>";
             echo "</tr>";
         }
     ?>
@@ -70,14 +69,14 @@
 
 if (isset($_GET['delete'])) 
 {
-   $delete_comment_id = $_GET['delete'];
+   $delete_user_id = $_GET['delete'];
 
-   $query = "DELETE FROM comments WHERE comment_id = $delete_comment_id LIMIT 1";
-   $result = mysqli_query($connection, $query);
+   $query = "DELETE FROM users WHERE user_id = $delete_user_id LIMIT 1";
+   $delete_result = mysqli_query($connection, $query);
 
-   confirmQuery($result);
+   confirmQuery($delete_result);
 
-   header("Location: comments.php");
+   header("Location: users.php");
 
 
 }
