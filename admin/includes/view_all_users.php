@@ -7,6 +7,8 @@
             <th>Lastname</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Cahnge To Admin</th>
+            <th>Change To Subscriber</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -52,6 +54,8 @@
 
 
             echo "<td>$user_role</td>";
+            echo "<td><a class='btn btn-success' href='users.php?change_to_admin=$user_id'>Change To Admin</a></td>";
+            echo "<td><a class='btn btn-warning' href='users.php?change_to_subscriber=$user_id'>Change To Subscriber</a></td>";
             echo "<td><a class='btn btn-danger' href='users.php?delete=$user_id'>Delete</a></td>";
             echo "</tr>";
         }
@@ -81,28 +85,28 @@ if (isset($_GET['delete']))
 
 }
 
-if (isset($_GET['approve'])) 
+if (isset($_GET['change_to_admin'])) 
 {
-    $the_approve_id = $_GET['approve'];
+    $change_to_admin = $_GET['change_to_admin'];
 
-    $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = $the_approve_id LIMIT 1";
-    $approve_comment_query = mysqli_query($connection, $query);
+    $query = "UPDATE users SET user_role = 'Admin' WHERE user_id = $change_to_admin LIMIT 1";
+    $change_to_admin_query = mysqli_query($connection, $query);
 
-    confirmQuery($approve_comment_query);
+    confirmQuery($change_to_admin_query);
 
-    header("Location: comments.php");
+    header("Location: users.php");
 }
 
-if(isset($_GET['unapprove']))
+if(isset($_GET['change_to_subscriber']))
 {
-    $the_unapprove_id = $_GET['unapprove'];
+    $change_to_subscriber = $_GET['change_to_subscriber'];
 
-    $query = "UPDATE comments SET comment_status = 'unaproved' WHERE comment_id = $the_unapprove_id LIMIT 1";
-    $unapprove_comment_query = mysqli_query($connection, $query);
+    $query = "UPDATE users SET user_role = 'Subscriber' WHERE user_id = $change_to_subscriber LIMIT 1";
+    $change_to_subscriber_query = mysqli_query($connection, $query);
 
-    confirmQuery($unapprove_comment_query);
+    confirmQuery($change_to_subscriber_query);
 
-    header("Location: comments.php");
+    header("Location: users.php");
 }
 
 ?>
