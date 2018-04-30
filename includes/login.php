@@ -18,13 +18,21 @@ if(isset($_POST['login']))
 
    while($row = mysqli_fetch_array($result))
    {
-      $user_id          = $row['user_id'];
-      $username         = $row['username'];
-      $password         = $row['password'];
-      $user_firstname   = $row['user_firstname'];
-      $user_lastname    = $row['user_lastname'];
+      $db_user_id          = $row['user_id'];
+      $db_username         = $row['username'];
+      $db_password         = $row['password'];
+      $db_user_firstname   = $row['user_firstname'];
+      $db_user_lastname    = $row['user_lastname'];
+      $db_user_role        = $row['user_role'];
+   }
 
-      
+   if($username !== $db_username && $password !== $db_password)
+   {
+        header("Location: ../index.php");
+   }
+   else
+   {
+       header("Location: ../admin/index.php");
    }
 
    
