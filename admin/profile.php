@@ -4,9 +4,9 @@
 
 if(isset($_SESSION['username']))
 {
-    $username = $_SESSION['username'];
+    $session_username = $_SESSION['username'];
 
-    $query = "SELECT * FROM users WHERE username = '$username'";
+    $query = "SELECT * FROM users WHERE username = '$session_username'";
     $edit_user_profile = mysqli_query($connection, $query);
 
     while($row = mysqli_fetch_array($edit_user_profile))
@@ -20,6 +20,45 @@ if(isset($_SESSION['username']))
         $user_image         = $row['user_image'];
         $user_role          = $row['user_role'];
     }
+}
+
+?>
+
+<?php
+
+if(isset($_POST['update_user']))
+{
+   $username        = mysqli_real_escape_string($connection, trim($_POST['username']));
+   $password        = mysqli_real_escape_string($connection, trim($_POST['password']));
+   $user_firstname  = mysqli_real_escape_string($connection, trim($_POST['user_firstname']));
+   $user_lastname   = mysqli_real_escape_string($connection, trim($_POST['user_lastname']));
+   $user_email      = mysqli_real_escape_string($connection, trim($_POST['user_email']));
+   $user_role       = mysqli_real_escape_string($connection, trim($_POST['user_role']));
+
+   $user_image      = $_FILES['user_image']['name'];
+   $user_image_tmp  = $_FILES['user_image']['tmp_name'];
+
+   move_uploaded_file($user_image_tmp, "../images/$user_image");
+
+   if(empty($user_image))
+   {
+        $query = "SELECT * FROM users WHERE username = $session_username";
+        $select_image = mysqli_query($connection, $query);
+
+        while($row = mysqli_fetch_array($select_image))
+        {
+            $user_image = $row['user_image'];
+        }
+   }
+
+   $update_user_profile_query = "UPDATE users SET password = '$password', user_firstname = '$user_firstname', 
+                                user_lastname = '$user_lastname', user_email = '$user_email', user_role = '$user_role', 
+                                username = '$username', user_image = '$user_image' WHERE username = '$session_username'";
+
+    $result = mysqli_query($connection, $update_user_profile_query);
+
+    confirmQuery($result);
+   
 }
 
 ?>
@@ -38,7 +77,7 @@ if(isset($_SESSION['username']))
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Welcome To Admin
-                            <small>Author Name Here</small>
+                            <small><?php echo $_SESSION['username']; ?></small>
                         </h1>
 
                         <form action="" method="post" enctype="multipart/form-data">
@@ -73,6 +112,7 @@ if(isset($_SESSION['username']))
                                 <img class="img-responsive" width="200" src="../images/<?php echo $user_image; ?>" alt="">
                                 <input type="file" name="user_image" class="form-control">
                             </div>
+
 
                             <div class="form-group">
                                 <select name="user_role" class="form-control">
