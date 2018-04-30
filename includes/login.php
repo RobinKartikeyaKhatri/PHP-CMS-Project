@@ -1,6 +1,7 @@
 <?php ob_start(); ?>
 <?php session_start(); ?>
 <?php include("db.php"); ?>
+
 <?php
 
 if(isset($_POST['login']))
@@ -32,6 +33,13 @@ if(isset($_POST['login']))
    }
    else
    {
+       $_SESSION['user_id']         = $db_user_id;
+       $_SESSION['username']        = $db_username;
+       $_SESSION['password']        = $db_password;
+       $_SESSION['user_firstname']  = $db_user_firstname;
+       $_SESSION['user_lastname']   = $db_user_lastname;
+       $_SESSION['user_role']       = $db_user_role;
+
        header("Location: ../admin/index.php");
    }
 
