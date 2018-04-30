@@ -4,7 +4,22 @@
 
 if(isset($_SESSION['username']))
 {
-    $_SESSION['username'];
+    $username = $_SESSION['username'];
+
+    $query = "SELECT * FROM users WHERE username = '$username'";
+    $edit_user_profile = mysqli_query($connection, $query);
+
+    while($row = mysqli_fetch_array($edit_user_profile))
+    {
+        $user_id            = $row['user_id'];
+        $username           = $row['username'];
+        $password           = $row['password'];
+        $user_firstname     = $row['user_firstname'];
+        $user_lastname      = $row['user_lastname'];
+        $user_email         = $row['user_email'];
+        $user_image         = $row['user_image'];
+        $user_role          = $row['user_role'];
+    }
 }
 
 ?>
@@ -83,7 +98,7 @@ if(isset($_SESSION['username']))
                             </div>
 
                             <div class="form-group">
-                                <input type="submit" value="Update User" name="update_user" class="btn btn-primary">
+                                <input type="submit" value="Update Profile" name="update_user" class="btn btn-primary">
                             </div>
 
                         </form>
