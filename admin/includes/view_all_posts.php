@@ -1,77 +1,94 @@
-<table class="table table-responsive table-hover">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Author</th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Status</th>
-            <th>Image</th>
-            <th>Tags</th>
-            <th>Comments</th>
-            <th>Date</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
+<form action="" method="post">
+    <table class="table table-responsive table-hover">
 
-    <?php //Showing all posts
+    <div id="bulkOptionsContainer" class="col-xs-4">
+        <select name="" id="" class="form-control">
+            <option value="">Select Options</option>
+            <option value="">Publish</option>
+            <option value="">Draft</option>
+            <option value="">Delete</option>
+        </select>
+    </div>
 
-        $query = "SELECT * FROM posts";
-        $result = mysqli_query($connection, $query);
+    <div class="col-xs-4">
+        <input type="submit" value="Apply" name="submit" class="btn btn-success">
+        <a class="btn btn-primary" href="posts.php?source=add_post">Add New Post</a>
+    </div>
 
-        while ($row = mysqli_fetch_array($result)) 
-        {
-            $post_id = $row['post_id'];
-            $post_category_id = $row['post_category_id'];
-            $post_title = $row['post_title'];
-            $post_author = $row['post_author'];
-            $post_date = $row['post_date'];
-            $post_image = $row['post_image'];
-            $post_content = $row['post_content'];
-            $post_tags = $row['post_tags'];
-            $post_comment_count = $row['post_comment_count'];
-            $post_status = $row['post_status'];
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Author</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Image</th>
+                <th>Tags</th>
+                <th>Comments</th>
+                <th>Date</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
 
-            echo "<tr>";
-            echo "<td>$post_id</td>";
-            echo "<td>$post_author</td>";
-            echo "<td>$post_title</td>";
+        <?php //Showing all posts
 
-            $query = "SELECT * FROM categories WHERE cat_id = $post_category_id";
-            $select_categories = mysqli_query($connection, $query);
-            while($row = mysqli_fetch_array($select_categories))
+            $query = "SELECT * FROM posts";
+            $result = mysqli_query($connection, $query);
+
+            while ($row = mysqli_fetch_array($result)) 
             {
-                $cat_id = $row['cat_id'];
-                $cat_title = $row['cat_title'];
+                $post_id = $row['post_id'];
+                $post_category_id = $row['post_category_id'];
+                $post_title = $row['post_title'];
+                $post_author = $row['post_author'];
+                $post_date = $row['post_date'];
+                $post_image = $row['post_image'];
+                $post_content = $row['post_content'];
+                $post_tags = $row['post_tags'];
+                $post_comment_count = $row['post_comment_count'];
+                $post_status = $row['post_status'];
 
-                echo "<td>$cat_title</td>";
+                echo "<tr>";
+                echo "<td>$post_id</td>";
+                echo "<td>$post_author</td>";
+                echo "<td>$post_title</td>";
+
+                $query = "SELECT * FROM categories WHERE cat_id = $post_category_id";
+                $select_categories = mysqli_query($connection, $query);
+                while($row = mysqli_fetch_array($select_categories))
+                {
+                    $cat_id = $row['cat_id'];
+                    $cat_title = $row['cat_title'];
+
+                    echo "<td>$cat_title</td>";
+                }
+                
+
+                
+
+
+
+                echo "<td>$post_status";
+                echo "<td><img class='img-responsive' width='100' src='../images/$post_image'</td>";
+                echo "<td>$post_tags</td>";
+                echo "<td>$post_comment_count</td>";
+                echo "<td>$post_date</td>";
+                echo "<td><a class='btn btn-warning' href='posts.php?source=edit_post&p_id=$post_id'>Edit</a></td>";
+                echo "<td><a class='btn btn-danger' href='posts.php?delete=$post_id'>Delete</a></td>";
+                echo "</tr>";
             }
-            
-
-            
-
-
-
-            echo "<td>$post_status";
-            echo "<td><img class='img-responsive' width='100' src='../images/$post_image'</td>";
-            echo "<td>$post_tags</td>";
-            echo "<td>$post_comment_count</td>";
-            echo "<td>$post_date</td>";
-            echo "<td><a class='btn btn-warning' href='posts.php?source=edit_post&p_id=$post_id'>Edit</a></td>";
-            echo "<td><a class='btn btn-danger' href='posts.php?delete=$post_id'>Delete</a></td>";
-            echo "</tr>";
-        }
-    ?>
-    
-
+        ?>
         
-    
 
+            
         
-    </tbody>
-</table>
+
+            
+        </tbody>
+    </table>
+</form>
 
 <?php
 
