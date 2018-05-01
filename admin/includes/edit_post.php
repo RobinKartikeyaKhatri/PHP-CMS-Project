@@ -59,6 +59,8 @@
 
         confirmQuery($result);
 
+        echo "<p class='text-center text-success bg-success'>Post Updated. <a href='../post.php?p_id=$the_get_post_id'> View Post</a> Or <a href='posts.php'>Edit More Posts</a></p>";
+
 
     }
 
