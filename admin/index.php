@@ -153,6 +153,23 @@
                     </div>
                 </div>
 
+                <?php
+
+                    $query = "SELECT * FROM posts WHERE post_status = 'draft'";
+                    $select_all__draft_posts = mysqli_query($connection, $query);
+                    $post_draft_counts = mysqli_num_rows($select_all__draft_posts);
+
+                    $query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
+                    $select_all_unapproved_comments = mysqli_query($connection, $query);
+                    $comments_unapproved_counts = mysqli_num_rows($select_all_unapproved_comments);
+
+                    $query = "SELECT * FROM users WHERE user_role = 'Subscriber'";
+                    $select_all_subscriber_users = mysqli_query($connection, $query);
+                    $users_subscribers_counts = mysqli_num_rows($select_all_subscriber_users);
+
+                
+                ?>
+
                 <div class="row"> <!-- Google Charts -->
                     <script type="text/javascript">
                         google.charts.load('current', {'packages':['bar']});
@@ -163,12 +180,18 @@
                             ['Data', 'Count'],
 
                             <?php
-                            
-                            
+                                
+                                $element_text = ['Active Posts', 'Draft Posts','Comments', 'Unapproved Comments', 'Users', 'Subscribers Users', 'Categories'];
+                                $element_count = [$post_counts, $post_draft_counts, $comments_counts, $comments_unapproved_counts, $users_counts, $users_subscribers_counts, $categories_counts];
+
+                                for($i = 0; $i < 7; $i++)
+                                {
+                                    echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
+                                }
                             
                             ?>
 
-                            ['Posts', 1000],
+                            // ['Posts', 1000],
                             
                         ]);
 
