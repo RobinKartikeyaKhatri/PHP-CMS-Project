@@ -25,6 +25,8 @@
 
         confirmQuery($create_user);
 
+        echo "User Added Successfuly" . " " . "<a href='users.php'>View Users</a>";
+
     }
 
 ?>
