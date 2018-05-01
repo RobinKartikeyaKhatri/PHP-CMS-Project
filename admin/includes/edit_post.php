@@ -100,9 +100,28 @@
     </div>
 
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input type="text" name="post_status" class="form-control" value="<?php echo $post_status; ?>">
+        <label for="post_category">Post Status</label>
+        <select name="post_status" class="form-control">
+            <option value='<?php echo $post_status; ?>'><?php echo $post_status; ?></option>
+            
+            <?php
+                if($post_status == "published")
+                {
+                    echo "<option value='draft'>Draft</option>";
+                }
+                else
+                {
+                    echo "<option value='published'>Published</option>";
+                }
+            ?>
+            
+        </select>
     </div>
+
+    <!-- <div class="form-group">
+        <label for="post_status">Post Status</label>
+        <input type="text" name="post_status" class="form-control" value="<?php //echo $post_status; ?>">
+    </div> -->
 
     <div class="form-group">
         <img class='img-responsive' width = "200" src="../images/<?php echo $post_image; ?>" alt="">
