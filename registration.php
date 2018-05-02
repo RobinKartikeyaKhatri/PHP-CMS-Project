@@ -1,6 +1,27 @@
 <?php  include "includes/db.php"; ?>
  <?php  include "includes/header.php"; ?>
 
+ <?php
+ 
+ if(isset($_POST['submit']))
+ {
+    $username       = mysqli_real_escape_string($connection, trim($_POST['username']));
+    $email          = mysqli_real_escape_string($connection, trim($_POST['email']));
+    $password       = mysqli_real_escape_string($connection, trim($_POST['password']));
+
+    if(!empty($username) && !empty($email) && !empty($password))
+    {
+
+    }
+    else
+    {
+        echo "<script>alert('Fields cannot be empty')</script>";
+    }
+ }
+ 
+ 
+ ?>
+
 
     <!-- Navigation -->
     
