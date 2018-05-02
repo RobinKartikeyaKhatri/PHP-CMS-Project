@@ -28,6 +28,10 @@
 
         confirmQuery($result);
 
+        $the_get_post_id = mysqli_insert_id($connection);
+
+        echo "<p class='text-center text-success bg-success'>Post Created. <a href='../post.php?p_id=$the_get_post_id'> View Post</a> Or <a href='posts.php'>Edit More Posts</a></p>";
+
     }
 
 ?>
