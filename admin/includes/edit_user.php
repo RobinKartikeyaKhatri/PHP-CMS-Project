@@ -108,7 +108,7 @@
 
     <div class="form-group">
         <select name="user_role" class="form-control">
-            <option value="Subscriber"><?php echo $user_role?></option>
+            <option value="<?php echo $user_role?>"><?php echo $user_role?></option>
         
         <?php
         
