@@ -11,7 +11,21 @@
 
     if(!empty($username) && !empty($email) && !empty($password))
     {
+        $select_randSalt_query = "SELECT randSalt FROM users";
+        $result = mysqli_query($connection, $query);
 
+        if(!$result)
+        {
+            die("Query failed " . mysqli_error($connection));
+        }
+
+        $query = "INSERT INTO users (username, password, email) VALUES('$username', '$password', '$email')";
+        $user_registration_query = mysqli_query($connection, $query);
+
+        if(!$user_registration_query)
+        {
+            die("Query failed " . mysqli_error($connection));
+        }
     }
     else
     {
