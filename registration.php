@@ -19,6 +19,12 @@
             die("Query failed " . mysqli_error($connection));
         }
 
+        while($row = mysqli_fetch_array($result))
+        {
+            $password = $row['password'];
+            $randSalt = $row['randSalt'];
+        }
+
         $query = "INSERT INTO users (username, password, email) VALUES('$username', '$password', '$email')";
         $user_registration_query = mysqli_query($connection, $query);
 
