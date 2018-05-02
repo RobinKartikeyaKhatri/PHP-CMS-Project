@@ -120,7 +120,7 @@ if(isset($_POST['checkBoxArray']))
                 echo "<td>$post_date</td>";
                 echo "<td><a class='btn btn-primary' href='../post.php?p_id=$post_id'>View Post</a></td>";
                 echo "<td><a class='btn btn-warning' href='posts.php?source=edit_post&p_id=$post_id'>Edit</a></td>";
-                echo "<td><a class='btn btn-danger' href='posts.php?delete=$post_id'>Delete</a></td>";
+                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" class='btn btn-danger' href='posts.php?delete=$post_id'>Delete</a></td>";
                 echo "</tr>";
             }
         ?>
