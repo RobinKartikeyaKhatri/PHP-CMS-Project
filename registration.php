@@ -11,7 +11,7 @@
 
     if(!empty($username) && !empty($email) && !empty($password))
     {
-        $select_randSalt_query = "SELECT randSalt FROM users";
+        $query = "SELECT randSalt FROM users";
         $result = mysqli_query($connection, $query);
 
         if(!$result)
@@ -21,16 +21,21 @@
 
         while($row = mysqli_fetch_array($result))
         {
-            $password = $row['password'];
             $randSalt = $row['randSalt'];
         }
 
-        $query = "INSERT INTO users (username, password, email) VALUES('$username', '$password', '$email')";
+        $password = crypt($password, $randSalt);
+
+        $query = "INSERT INTO users (username, password, user_email, user_role) VALUES('$username', '$password', '$email', 'subscriber')";
         $user_registration_query = mysqli_query($connection, $query);
 
         if(!$user_registration_query)
         {
             die("Query failed " . mysqli_error($connection));
+        }
+        else
+        {
+            echo "<h2 class='text-center text-success'>Your registration has been submitted</h2>";
         }
     }
     else
