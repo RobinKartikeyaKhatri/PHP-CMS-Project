@@ -26,7 +26,7 @@
 
         $password = crypt($password, $randSalt);
 
-        $query = "INSERT INTO users (username, password, user_email, user_role) VALUES('$username', '$password', '$email', 'subscriber')";
+        $query = "INSERT INTO users (username, password, user_email, user_role) VALUES('$username', '$password', '$email', 'Subscriber')";
         $user_registration_query = mysqli_query($connection, $query);
 
         if(!$user_registration_query)
