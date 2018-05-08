@@ -48,17 +48,19 @@
             }
        }
 
-       $query = "SELECT randSalt FROM users";
-       $select_rand_salt_query = mysqli_query($connection, $query);
-       if(!$select_rand_salt_query)
-       {
-           die("Query failed " . mysqli_error($connection));
-       }
+    //    $query = "SELECT randSalt FROM users";
+    //    $select_rand_salt_query = mysqli_query($connection, $query);
+    //    if(!$select_rand_salt_query)
+    //    {
+    //        die("Query failed " . mysqli_error($connection));
+    //    }
 
-       $row = mysqli_fetch_array($select_rand_salt_query);
-       $salt = $row['randSalt'];
+    //    $row = mysqli_fetch_array($select_rand_salt_query);
+    //    $salt = $row['randSalt'];
 
-       $password = crypt($password, $salt);
+    //    $password = crypt($password, $salt);
+
+        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
        $query = "UPDATE users SET username = '$username', password = '$password', 
                 user_firstname = '$user_firstname', user_lastname = '$user_lastname', user_email = '$user_email', 
