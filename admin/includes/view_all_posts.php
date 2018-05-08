@@ -149,7 +149,13 @@ if(isset($_POST['checkBoxArray']))
                 echo "<td>$post_status";
                 echo "<td><img class='img-responsive' width='100' src='../images/$post_image'</td>";
                 echo "<td>$post_tags</td>";
-                echo "<td>$post_comment_count</td>";
+
+                $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
+                $send_comment_query = mysqli_query($connection, $query);
+                $count_comments = mysqli_num_rows($send_comment_query);
+
+
+                echo "<td>$count_comments</td>";
                 echo "<td>$post_date</td>";
                 echo "<td><a class='btn btn-primary' href='../post.php?p_id=$post_id'>View Post</a></td>";
                 echo "<td><a class='btn btn-warning' href='posts.php?source=edit_post&p_id=$post_id'>Edit</a></td>";
