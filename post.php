@@ -98,9 +98,9 @@
                             die("Query failed " . mysqli_error($connection));
                         }
 
-                        $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 
-                                WHERE post_id = $the_get_post_id";
-                        $increasing_commet_count = mysqli_query($connection, $query);
+                        // $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 
+                        //         WHERE post_id = $the_get_post_id";
+                        // $increasing_commet_count = mysqli_query($connection, $query);
                     }
                     else
                     {
