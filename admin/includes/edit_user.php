@@ -19,6 +19,10 @@
            $user_role       = $row['user_role'];
         }
     }
+    else
+    {
+        header("Location: index.php");
+    }
 
     if(isset($_POST['update_user']))
     {
