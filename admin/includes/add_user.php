@@ -12,10 +12,9 @@
        $user_image_tmp      = $_FILES['user_image']['tmp_name'];
        $user_role           = $_POST['user_role'];
 
-       
-       
-
        move_uploaded_file($user_image_tmp, "../images/$user_image");
+
+       $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
        $query = "INSERT INTO users(username, password, user_firstname, user_lastname, user_email, 
                     user_image, user_role) VALUES('$username', '$password', '$user_firstname', '$user_lastname', 
