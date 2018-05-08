@@ -11,20 +11,22 @@
 
     if(!empty($username) && !empty($email) && !empty($password))
     {
-        $query = "SELECT randSalt FROM users";
-        $result = mysqli_query($connection, $query);
+        //$query = "SELECT randSalt FROM users";
+        //$result = mysqli_query($connection, $query);
 
-        if(!$result)
-        {
-            die("Query failed " . mysqli_error($connection));
-        }
+        //if(!$result)
+        //{
+            //die("Query failed " . mysqli_error($connection));
+        //}
 
-        while($row = mysqli_fetch_array($result))
-        {
-            $randSalt = $row['randSalt'];
-        }
+        //while($row = mysqli_fetch_array($result))
+        //{
+            //$randSalt = $row['randSalt'];
+        //}
 
-        $password = crypt($password, $randSalt);
+        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+
+        //$password = crypt($password, $randSalt);
 
         $query = "INSERT INTO users (username, password, user_email, user_role) VALUES('$username', '$password', '$email', 'Subscriber')";
         $user_registration_query = mysqli_query($connection, $query);
