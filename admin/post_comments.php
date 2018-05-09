@@ -89,7 +89,7 @@
 
             echo "<td>$comment_date</td>";
             echo "<td><a class='btn btn-success' href='post_comments.php?approve=$comment_id&id=" . $_GET['id'] . "'>Approve</a></td>";
-            echo "<td><a class='btn btn-warning' href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
+            echo "<td><a class='btn btn-warning' href='post_comments.php?unapprove=$comment_id&id=" . $_GET['id'] . "'>Unapprove</a></td>";
             echo "<td><a class='btn btn-danger' href='post_comments.php?delete=$comment_id&id=" . $_GET['id'] . "'>Delete</a></td>";
             echo "</tr>";
         }
@@ -128,7 +128,7 @@ if (isset($_GET['approve']))
 
     confirmQuery($approve_comment_query);
 
-    header("Location: comments.php");
+    header("Location: post_comments.php?id=" . $_GET['id'] . "");
 }
 
 if(isset($_GET['unapprove']))
@@ -140,7 +140,7 @@ if(isset($_GET['unapprove']))
 
     confirmQuery($unapprove_comment_query);
 
-    header("Location: comments.php");
+    header("Location: post_comments.php?id=" . $_GET['id'] . "");
 }
 
 ?>
