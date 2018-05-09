@@ -88,7 +88,7 @@
 
 
             echo "<td>$comment_date</td>";
-            echo "<td><a class='btn btn-success' href='comments.php?approve=$comment_id'>Approve</a></td>";
+            echo "<td><a class='btn btn-success' href='post_comments.php?approve=$comment_id&id=" . $_GET['id'] . "'>Approve</a></td>";
             echo "<td><a class='btn btn-warning' href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
             echo "<td><a class='btn btn-danger' href='post_comments.php?delete=$comment_id&id=" . $_GET['id'] . "'>Delete</a></td>";
             echo "</tr>";
