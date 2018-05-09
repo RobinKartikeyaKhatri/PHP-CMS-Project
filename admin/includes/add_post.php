@@ -87,7 +87,7 @@
                     $user_id = $row['user_id'];
                     $username = $row['username'];
                     
-                    echo "<option value='$user_id'>$username</option>";
+                    echo "<option value='$username'>$username</option>";
                 }
             
             ?>
