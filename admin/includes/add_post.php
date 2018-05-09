@@ -4,7 +4,7 @@
     {
        $post_title          = mysqli_real_escape_string($connection, trim($_POST['post_title']));
        $post_category_id    = mysqli_real_escape_string($connection, trim($_POST['post_category_id']));
-       $post_author         = mysqli_real_escape_string($connection, trim($_POST['post_author']));
+       $post_user           = mysqli_real_escape_string($connection, trim($_POST['post_user']));
        $post_status         = mysqli_real_escape_string($connection, trim($_POST['post_status']));
 
        $post_image          = $_FILES['image']['name'];
@@ -18,10 +18,10 @@
 
        move_uploaded_file($post_image_tmp, "../images/$post_image");
 
-       $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, 
+       $query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date, post_image, 
                     post_content, post_tags, post_status) VALUES($post_category_id, 
                     '$post_title', 
-                    '$post_author', now(), '$post_image', '$post_content', '$post_tags',  
+                    '$post_user', now(), '$post_image', '$post_content', '$post_tags',  
                     '$post_status')";
 
         $result = mysqli_query($connection, $query);
@@ -74,7 +74,7 @@
 
     <div class="form-group">
         <label for="post_auhtor">Users</label>
-        <select name="post_author" class="form-control">
+        <select name="post_user" class="form-control">
             <?php
             
                 $query = "SELECT * FROM users";
