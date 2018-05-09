@@ -99,6 +99,7 @@
     <div class="form-group">
         <label for="post_auhtor">Users</label>
         <select name="post_user" class="form-control">
+        <?php echo "<option value='$post_user'>$post_user</option>"; ?>
             <?php
             
                 $query = "SELECT * FROM users";
