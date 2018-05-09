@@ -73,9 +73,32 @@
     </div> -->
 
     <div class="form-group">
+        <label for="post_auhtor">Users</label>
+        <select name="post_author" class="form-control">
+            <?php
+            
+                $query = "SELECT * FROM users";
+                $result = mysqli_query($connection, $query);
+
+                confirmQuery($result);
+
+                while($row = mysqli_fetch_array($result))
+                {
+                    $user_id = $row['user_id'];
+                    $username = $row['username'];
+                    
+                    echo "<option value='$user_id'>$username</option>";
+                }
+            
+            ?>
+            
+        </select>
+    </div>
+
+    <!-- <div class="form-group">
         <label for="post_author">Post Author</label>
         <input type="text" name="post_author" class="form-control">
-    </div>
+    </div> -->
 
     <div class="form-group">
         <label for="post_status">Post Status</label>
