@@ -77,15 +77,24 @@
 
 if (isset($_GET['delete'])) 
 {
-   $delete_user_id = $_GET['delete'];
+    if(isset($_SESSION['user_role']))
+    {
 
-   $query = "DELETE FROM users WHERE user_id = $delete_user_id LIMIT 1";
-   $delete_result = mysqli_query($connection, $query);
+        if($_SESSION['user_role' == 'Admin'])
+        {
+            $delete_user_id = mysqli_real_escape_string($connection, $_GET['delete']);
 
-   confirmQuery($delete_result);
+            $query = "DELETE FROM users WHERE user_id = $delete_user_id LIMIT 1";
+            $delete_result = mysqli_query($connection, $query);
 
-   header("Location: users.php");
+            confirmQuery($delete_result);
 
+            header("Location: users.php");
+        }
+
+        
+
+    }
 
 }
 
