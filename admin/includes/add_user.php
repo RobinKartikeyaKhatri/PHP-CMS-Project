@@ -10,7 +10,7 @@
 
        $user_image          = $_FILES['user_image']['name'];
        $user_image_tmp      = $_FILES['user_image']['tmp_name'];
-       $user_role           = $_POST['user_role'];
+       $user_role           = mysqli_real_escape_string($connection, trim($_POST['user_role']));
 
        move_uploaded_file($user_image_tmp, "../images/$user_image");
 
