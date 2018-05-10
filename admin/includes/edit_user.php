@@ -2,7 +2,7 @@
 
     if(isset($_GET['edit_user']))
     {
-        $the_edit_user_id = $_GET['edit_user'];
+        $the_edit_user_id = mysqli_real_escape_string($connection, trim($_GET['edit_user']));
 
         $query = "SELECT * FROM users WHERE user_id = $the_edit_user_id";
         $select_all_users_data = mysqli_query($connection, $query);
@@ -34,7 +34,7 @@
 
        $user_image          = $_FILES['user_image']['name'];
        $user_image_tmp      = $_FILES['user_image']['tmp_name'];
-       $user_role           = $_POST['user_role'];
+       $user_role           = mysqli_real_escape_string($connection, trim($_POST['user_role']));
 
        
        
