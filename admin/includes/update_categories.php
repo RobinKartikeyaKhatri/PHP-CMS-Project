@@ -7,7 +7,7 @@
         // Catching GET request for updating categories
             if (isset($_GET['edit'])) 
             {
-                $the_edit_id = $_GET['edit'];
+                $the_edit_id = mysqli_real_escape_string($connection, trim($_GET['edit']));
 
                 $query = "SELECT * FROM categories WHERE cat_id = {$the_edit_id}";
                 $result = mysqli_query($connection, $query);
