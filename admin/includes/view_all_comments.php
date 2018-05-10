@@ -88,7 +88,7 @@
 
 if (isset($_GET['delete'])) 
 {
-   $delete_comment_id = $_GET['delete'];
+   $delete_comment_id = mysqli_real_escape_string($connection, trim($_GET['delete']));
 
    $query = "DELETE FROM comments WHERE comment_id = $delete_comment_id LIMIT 1";
    $result = mysqli_query($connection, $query);
@@ -102,7 +102,7 @@ if (isset($_GET['delete']))
 
 if (isset($_GET['approve'])) 
 {
-    $the_approve_id = $_GET['approve'];
+    $the_approve_id = mysqli_real_escape_string($connection, trim($_GET['approve']));
 
     $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = $the_approve_id LIMIT 1";
     $approve_comment_query = mysqli_query($connection, $query);
@@ -114,7 +114,7 @@ if (isset($_GET['approve']))
 
 if(isset($_GET['unapprove']))
 {
-    $the_unapprove_id = $_GET['unapprove'];
+    $the_unapprove_id = mysqli_real_escape_string($connection, trim($_GET['unapprove']));
 
     $query = "UPDATE comments SET comment_status = 'unaproved' WHERE comment_id = $the_unapprove_id LIMIT 1";
     $unapprove_comment_query = mysqli_query($connection, $query);
