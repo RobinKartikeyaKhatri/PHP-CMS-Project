@@ -193,7 +193,7 @@ if(isset($_POST['checkBoxArray']))
 
 if (isset($_GET['delete'])) 
 {
-   $delete_post_id = $_GET['delete'];
+   $delete_post_id = mysqli_real_escape_string($connection, trim($_GET['delete']));
 
    $query = "DELETE FROM posts WHERE post_id = $delete_post_id LIMIT 1";
    $result = mysqli_query($connection, $query);
@@ -207,7 +207,7 @@ if (isset($_GET['delete']))
 
 if(isset($_GET['reset']))
 {
-    $the_post_reset_id = $_GET['reset'];
+    $the_post_reset_id = mysqli_real_escape_string($connection, trim($_GET['reset']));
 
     $query = "UPDATE posts SET post_views_count = 0 WHERE post_id =" . mysqli_real_escape_string($connection, $_GET['reset']) . " ";
     $resetQuery = mysqli_query($connection, $query);
