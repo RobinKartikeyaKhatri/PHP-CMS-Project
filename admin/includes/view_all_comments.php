@@ -88,40 +88,61 @@
 
 if (isset($_GET['delete'])) 
 {
-   $delete_comment_id = mysqli_real_escape_string($connection, trim($_GET['delete']));
+    if(isset($_SESSION['user_role']))
+    {
+        if($_SESSION['user_role'] == 'Admin')
+        {
+            $delete_comment_id = mysqli_real_escape_string($connection, trim($_GET['delete']));
 
-   $query = "DELETE FROM comments WHERE comment_id = $delete_comment_id LIMIT 1";
-   $result = mysqli_query($connection, $query);
+            $query = "DELETE FROM comments WHERE comment_id = $delete_comment_id LIMIT 1";
+            $result = mysqli_query($connection, $query);
 
-   confirmQuery($result);
+            confirmQuery($result);
 
-   header("Location: comments.php");
+            header("Location: comments.php");
+        }
+    }
+   
 
 
 }
 
 if (isset($_GET['approve'])) 
 {
-    $the_approve_id = mysqli_real_escape_string($connection, trim($_GET['approve']));
+    if(isset($_SESSION['user_role']))
+    {
+        if($_SESSION['user_role'] == 'Admin')
+        {
+            $the_approve_id = mysqli_real_escape_string($connection, trim($_GET['approve']));
 
-    $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = $the_approve_id LIMIT 1";
-    $approve_comment_query = mysqli_query($connection, $query);
+            $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = $the_approve_id LIMIT 1";
+            $approve_comment_query = mysqli_query($connection, $query);
 
-    confirmQuery($approve_comment_query);
+            confirmQuery($approve_comment_query);
 
-    header("Location: comments.php");
+            header("Location: comments.php");
+        }
+    }
+    
 }
 
 if(isset($_GET['unapprove']))
 {
-    $the_unapprove_id = mysqli_real_escape_string($connection, trim($_GET['unapprove']));
+    if(isset($_SESSION['user_role']))
+    {
+        if($_SESSION['user_role'] == 'Admin')
+        {
+            $the_unapprove_id = mysqli_real_escape_string($connection, trim($_GET['unapprove']));
 
-    $query = "UPDATE comments SET comment_status = 'unaproved' WHERE comment_id = $the_unapprove_id LIMIT 1";
-    $unapprove_comment_query = mysqli_query($connection, $query);
+            $query = "UPDATE comments SET comment_status = 'unaproved' WHERE comment_id = $the_unapprove_id LIMIT 1";
+            $unapprove_comment_query = mysqli_query($connection, $query);
 
-    confirmQuery($unapprove_comment_query);
+            confirmQuery($unapprove_comment_query);
 
-    header("Location: comments.php");
+            header("Location: comments.php");
+        }
+    }
+    
 }
 
 ?>
