@@ -29,15 +29,22 @@
         // Code for Updating Categories
             if(isset($_POST['update']))
             {
-                $cat_title = $_POST['cat_title'];
-
-                $query = "UPDATE categories SET cat_title = '{$cat_title}' WHERE cat_id = $cat_id";
-                $result = mysqli_query($connection, $query);
-
-                if(!$result)
+                if(isset($_SESSION['user_role']))
                 {
-                    die("Query failed " . mysqli_error($connection));
+                    if($_SESSION['user_role'] == 'Admin')
+                    {
+                        $cat_title = mysqli_real_escape_string($connection, trim($_POST['cat_title']));
+
+                        $query = "UPDATE categories SET cat_title = '{$cat_title}' WHERE cat_id = $cat_id";
+                        $result = mysqli_query($connection, $query);
+
+                        if(!$result)
+                        {
+                            die("Query failed " . mysqli_error($connection));
+                        }
+                    }
                 }
+                
             }
                                     
         ?>                                
