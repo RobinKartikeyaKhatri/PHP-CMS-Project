@@ -54,12 +54,19 @@
 
         if(isset($_GET['delete']))
         {
-            $the_delete_cat_id = $_GET['delete'];
+            if(isset($_SESSION['user_role']))
+            {
+                if($_SESSION['user_role'] == 'Admin')
+                {
+                    $the_delete_cat_id = mysqli_real_escape_string($connection, trim($_GET['delete']));
 
-            $query = "DELETE FROM categories WHERE cat_id = {$the_delete_cat_id} LIMIT 1";
-            $result = mysqli_query($connection, $query);
+                    $query = "DELETE FROM categories WHERE cat_id = {$the_delete_cat_id} LIMIT 1";
+                    $result = mysqli_query($connection, $query);
 
-            header("Location: categories.php");
+                    header("Location: categories.php");
+                }
+            }
+            
         }
     }
 
