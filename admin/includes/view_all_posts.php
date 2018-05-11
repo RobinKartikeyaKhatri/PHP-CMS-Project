@@ -193,14 +193,21 @@ if(isset($_POST['checkBoxArray']))
 
 if (isset($_GET['delete'])) 
 {
-   $delete_post_id = mysqli_real_escape_string($connection, trim($_GET['delete']));
+    if(isset($_SESSION['user_role']))
+    {
+        if($_SESSION['user_role'] == 'Admin')
+        {
+            $delete_post_id = mysqli_real_escape_string($connection, trim($_GET['delete']));
 
-   $query = "DELETE FROM posts WHERE post_id = $delete_post_id LIMIT 1";
-   $result = mysqli_query($connection, $query);
+            $query = "DELETE FROM posts WHERE post_id = $delete_post_id LIMIT 1";
+            $result = mysqli_query($connection, $query);
 
-   confirmQuery($result);
+            confirmQuery($result);
 
-   header("Location: posts.php");
+            header("Location: posts.php");
+        }
+    }
+   
 
 
 }
