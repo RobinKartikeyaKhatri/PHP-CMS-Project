@@ -1,49 +1,23 @@
 <?php  include "includes/db.php"; ?>
- <?php  include "includes/header.php"; ?>
+<?php  include "includes/header.php"; ?>
 
  <?php
  
  if(isset($_POST['submit']))
  {
-    $username       = mysqli_real_escape_string($connection, trim($_POST['username']));
-    $email          = mysqli_real_escape_string($connection, trim($_POST['email']));
-    $password       = mysqli_real_escape_string($connection, trim($_POST['password']));
+    $to      = "robinkartik@yahoo.com";
+    $email   = mysqli_real_escape_string($connection, trim($_POST['email']));
+    $subject = mysqli_real_escape_string($connection, trim($_POST['subject']));
+    $body    = mysqli_real_escape_string($connection, trim($_POST['body']));
 
-    if(!empty($username) && !empty($email) && !empty($password))
-    {
-        //$query = "SELECT randSalt FROM users";
-        //$result = mysqli_query($connection, $query);
-
-        //if(!$result)
-        //{
-            //die("Query failed " . mysqli_error($connection));
-        //}
-
-        //while($row = mysqli_fetch_array($result))
-        //{
-            //$randSalt = $row['randSalt'];
-        //}
-
-        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
-
-        //$password = crypt($password, $randSalt);
-
-        $query = "INSERT INTO users (username, password, user_email, user_role) VALUES('$username', '$password', '$email', 'Subscriber')";
-        $user_registration_query = mysqli_query($connection, $query);
-
-        if(!$user_registration_query)
-        {
-            die("Query failed " . mysqli_error($connection));
-        }
-        else
-        {
-            echo "<h2 class='text-center text-success'>Your registration has been submitted</h2>";
-        }
-    }
-    else
-    {
-        echo "<script>alert('Fields cannot be empty')</script>";
-    }
+   if(!empty($email) && !empty($subject) && !empty($body))
+   {
+       
+   }
+   else
+   {
+       
+   }
  }
  
  
@@ -64,7 +38,7 @@
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="form-wrap">
                 <h1>Contact</h1>
-                    <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
+                    <form role="form" action="" method="post" id="login-form" autocomplete="off">
                          <div class="form-group">
                             <label for="email" class="sr-only">Email</label>
                             <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
