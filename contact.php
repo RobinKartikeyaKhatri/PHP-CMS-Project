@@ -6,18 +6,14 @@
  if(isset($_POST['submit']))
  {
     $to      = "robinkartik@yahoo.com";
-    $email   = mysqli_real_escape_string($connection, trim($_POST['email']));
-    $subject = mysqli_real_escape_string($connection, trim($_POST['subject']));
+    $header  = mysqli_real_escape_string($connection, trim($_POST['email']));
+    $subject = mysqli_real_escape_string($connection, trim(wordwrap($_POST['subject'], 70)));
     $body    = mysqli_real_escape_string($connection, trim($_POST['body']));
 
-   if(!empty($email) && !empty($subject) && !empty($body))
-   {
-       
-   }
-   else
-   {
-       
-   }
+    mail($to, $subject, $body, "From: " . $header);
+
+    echo "Your email has been sent. :)";
+   
  }
  
  
