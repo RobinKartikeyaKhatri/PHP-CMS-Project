@@ -1,5 +1,5 @@
 <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -12,7 +12,7 @@
         <h4 class="modal-title">Modal Delete</h4>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete this post?</p>
+        <h3 class="text-center text-danger">Are you sure you want to delete this post?</h3>
       </div>
       <div class="modal-footer">
         <a href="" class="btn btn-danger modal_delete_link">Delete</a>
