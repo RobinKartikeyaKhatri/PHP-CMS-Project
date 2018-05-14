@@ -123,4 +123,18 @@
         return mysqli_real_escape_string($connection, trim($string));
     }
 
+    // Created function for display chart data
+    function recordCount($table)
+    {
+        global $connection;
+        $query = "SELECT * FROM " . $table;
+        $select_all_posts = mysqli_query($connection, $query);
+
+        $result = mysqli_num_rows($select_all_posts);
+
+        confirmQuery($result);
+
+        return $result;
+    }
+
 ?>
