@@ -137,4 +137,15 @@
         return $result;
     }
 
+    // Created function for display various statuss and user_role
+    function checkStatus($table_name, $column_name, $status)
+    {
+        global $connection;
+
+        $query = "SELECT * FROM $table_name WHERE $column_name = '$status'";
+        $select_all__published_posts = mysqli_query($connection, $query);
+        return mysqli_num_rows($select_all__published_posts);
+
+    }
+
 ?>
