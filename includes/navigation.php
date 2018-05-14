@@ -23,8 +23,34 @@
                     {
                         $cat_id = $row['cat_id'];
                         $cat_title = $row['cat_title'];
+
+                        $category_class = '';
+
+                        $registration_class = '';
+
+                        $contact_class = '';
+
+                        $pageName = basename($_SERVER['PHP_SELF']);
+
+                        $registration = 'registration.php';
+
+                        $contact = 'contact.php';
+
+                        if(isset($_GET['category']) && $_GET['category'] == $cat_id)
+                        {
+                            $category_class = 'active';
+                        }
+                        elseif ($pageName == $registration) 
+                        {
+                            $registration_class = 'active';
+                        }
+
+                        elseif ($pageName == $contact) 
+                        {
+                            $contact_class = 'active';
+                        }
                 ?>
-                    <li>
+                    <li class='<?php echo $category_class; ?>'>
                         <a href="category.php?category=<?php echo $cat_id; ?>"><?php echo $cat_title; ?></a>
                     </li>
             <?php   }
@@ -52,10 +78,10 @@
 
                     ?>
 
-                    <li>
+                    <li class='<?php echo $registration_class; ?>'>
                         <a href="registration.php">Registration</a>
                     </li>
-                    <li>
+                    <li class='<?php echo $contact_class; ?>'>
                         <a href="contact.php">Contact</a>
                     </li>
                 </ul>
