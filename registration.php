@@ -1,5 +1,7 @@
 <?php  include "includes/db.php"; ?>
- <?php  include "includes/header.php"; ?>
+<?php  include "includes/header.php"; ?>
+<?php  include "/admin/functions.php"; ?>
+
 
  <?php
  
@@ -9,40 +11,36 @@
     $email          = mysqli_real_escape_string($connection, trim($_POST['email']));
     $password       = mysqli_real_escape_string($connection, trim($_POST['password']));
 
-    if(!empty($username) && !empty($email) && !empty($password))
+    if(username_exists($username))
     {
-        //$query = "SELECT randSalt FROM users";
-        //$result = mysqli_query($connection, $query);
-
-        //if(!$result)
-        //{
-            //die("Query failed " . mysqli_error($connection));
-        //}
-
-        //while($row = mysqli_fetch_array($result))
-        //{
-            //$randSalt = $row['randSalt'];
-        //}
-
-        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
-
-        //$password = crypt($password, $randSalt);
-
-        $query = "INSERT INTO users (username, password, user_email, user_role) VALUES('$username', '$password', '$email', 'Subscriber')";
-        $user_registration_query = mysqli_query($connection, $query);
-
-        if(!$user_registration_query)
-        {
-            die("Query failed " . mysqli_error($connection));
-        }
-        else
-        {
-            echo "<h2 class='text-center text-success'>Your registration has been submitted</h2>";
-        }
+        echo "<h2 class='text-center text-danger'>User with this username already exists, try different username instead</h2>";
     }
     else
     {
-        echo "<script>alert('Fields cannot be empty')</script>";
+        if(!empty($username) && !empty($email) && !empty($password))
+        {
+            
+    
+            $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+    
+            
+    
+            $query = "INSERT INTO users (username, password, user_email, user_role) VALUES('$username', '$password', '$email', 'Subscriber')";
+            $user_registration_query = mysqli_query($connection, $query);
+    
+            if(!$user_registration_query)
+            {
+                die("Query failed " . mysqli_error($connection));
+            }
+            else
+            {
+                echo "<h2 class='text-center text-success'>Your registration has been submitted</h2>";
+            }
+        }
+        else
+        {
+            echo "<script>alert('Fields cannot be empty')</script>";
+        }
     }
  }
  
